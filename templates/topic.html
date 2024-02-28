@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ topic_name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        header {
+            background-color: rgba(108, 121, 134, 0.8);
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: rgba(51, 51, 51, 0.8);
+            color: #fff;
+            padding: 10px;
+            text-align: right;
+            text-decoration: none;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            text-align: center;
+            border-bottom: none; 
+        }
+
+        nav a:hover {
+            text-decoration: none;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.515);
+            border-radius: 10px;
+            margin: 20px;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .button-group a {
+            text-align: center;
+            margin-bottom: 5px;
+            background-color: #394b5e;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .button-group a:hover {
+            background-color: #252628;
+            text-align: center;
+        }
+
+        footer {
+            background-color: rgba(51, 51, 51, 0.8);
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Biological Information App</h1>
+    <p>Welcome to our app! Explore various biological topics below.</p>
+</header>
+
+<nav>
+    <a href="/" class="nav-link">Home</a>
+</nav>
+
+<main>
+    <h2>{{ topic_name }}</h2>
+    <img src="{{ url_for('static', filename=topic_data['image']) }}" alt="{{ topic_name }} Image" class="lazyload">
+    <p>{{ topic_data['description'] }}</p>
+    <div class="button-group">
+        <a href="{{ topic_data['information_url'] }}" class="button">Information</a>
+    </div>
+    <div class="button-group">
+        <a href="{{ topic_data['locations_url'] }}" class="button">Locations</a>
+    </div>
+</main>
+
+<footer>
+    &copy; 2024 Biological Information App
+</footer>
+
+<script>
+    var backgroundImages = [
+        "{{ url_for('static', filename='background1.jpg') }}",
+        "{{ url_for('static', filename='background2.jpg') }}",
+        "{{ url_for('static', filename='background3.jpg') }}"
+    ];
+
+    var currentIndex = 0;
+
+    function changeBackground() {
+        document.body.style.backgroundImage = 'url(' + backgroundImages[currentIndex] + ')';
+        currentIndex = (currentIndex + 1) % backgroundImages.length;
+    }
+
+    setInterval(changeBackground, 5000);
+</script>
+
+</body>
+</html>

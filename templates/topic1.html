@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 1</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    
+</head>
+<body>
+    <header>
+        <h1>Biological Information App</h1>
+        <nav>
+            <a href="/">Home</a>
+        </nav>
+    </header>
+    <main>
+        <h2>{{ topic_name }} Topic</h2>
+        <p>This is the {{ topic_name }} topic page.</p>
+        <div class="button-group">
+            <a href="#" class="button" id="information-btn">Information</a>
+        </div>
+        <div id="information-content" style="display: none;">
+            <!-- Information content related to Cell or Photosynthesis -->
+            <p>This is information related to {{ topic_name }}.</p>
+        </div>
+        <div class="button-group">
+            <a href="{{ topic_data['locations_url'] }}" class="button">Locations</a>
+        </div>
+    </main>
+    
+    <footer>
+        &copy; 2024 Biological Information App
+    </footer>
+    <script>
+        document.getElementById('information-btn').addEventListener('click', function(event) {
+            event.preventDefault();
+            var infoContent = document.getElementById('information-content');
+            if (infoContent.style.display === 'none') {
+                infoContent.style.display = 'block';
+            } else {
+                infoContent.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

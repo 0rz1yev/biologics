@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biological Information App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            transition: background-image 0.5s ease; /* Add smooth transition */
+        }
+    </style>
+    <script>
+        // Preload background images
+        var backgroundImages = [
+            "{{ url_for('static', filename='background1.jpg') }}",
+            "{{ url_for('static', filename='background2.jpg') }}",
+            "{{ url_for('static', filename='background3.jpg') }}",
+            "{{ url_for('static', filename='background4.jpg') }}"
+        ];
+
+        function preloadImages(urls) {
+            urls.forEach(url => {
+                var img = new Image();
+                img.src = url;
+            });
+        }
+
+        preloadImages(backgroundImages);
+    </script>
+</head>
+<body>
+
+<header>
+    <h1>Biological Information App</h1>
+    <p>Welcome to our app! Explore various biological topics below.</p>
+</header>
+
+<nav>
+    <a href="/" class="nav-link">Home</a>
+    <a href="#" class="nav-link">About</a>
+    <a href="#" class="nav-link">Contact</a>
+</nav>
+
+<main>
+    <h2>Explore Biological Topics</h2>
+    <ul class="topic-list">
+        {% for topic, data in topics.items() %}
+        <li>
+            <a href="/topic/{{ topic }}">
+                <div class="topic-thumbnail">
+                    <img src="{{ url_for('static', filename=data['image']) }}" alt="{{ topic }} Image" class="lazyload">
+                </div>
+                <div class="topic-info">
+                    <h3>{{ topic }}</h3>
+                    <p>{{ data['description'] }}</p>
+                </div>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</main>
+
+<footer>
+    &copy; 2024 Biological Information App
+</footer>
+
+<script>
+    // Array of background image URLs
+    var backgroundImages = [
+        "{{ url_for('static', filename='background1.jpg') }}",
+        "{{ url_for('static', filename='background2.jpg') }}",
+        "{{ url_for('static', filename='background3.jpg') }}",
+        "{{ url_for('static', filename='background4.jpg') }}"
+    ];
+
+    var currentIndex = 0;
+
+    function changeBackground() {
+        document.body.style.backgroundImage = 'url(' + backgroundImages[currentIndex] + ')';
+        currentIndex = (currentIndex + 1) % backgroundImages.length;
+    }
+
+    // Call changeBackground function every 5 seconds
+    setInterval(changeBackground, 5000);
+</script>
+
+</body>
+</html>
+
